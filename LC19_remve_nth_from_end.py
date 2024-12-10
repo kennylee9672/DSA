@@ -6,7 +6,7 @@ https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
 Given the head of a linked list, remove the nth node from the end of the list and return its head.
 '''
 
-from linked_list import LinkedList, Node
+from lib.linked_list import Node, LinkedList
 
 
 def removeNthFromEnd(nums: LinkedList, k):
