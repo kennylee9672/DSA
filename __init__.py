@@ -1,4 +1,6 @@
 from lib.binary_search_tree import BinarySearchTree
+from lib.graph_traverser import Traverser
+from lib.graph import Graph
 from tests import (
     testTraveral,
     testProperties,
@@ -7,52 +9,79 @@ from tests import (
     testBFS,
 )
 
+
+def createGraph():
+    graph = Graph()
+    for lable in ["A", "B", "C", "D"]:
+        graph.addNode(lable)
+    graph.addEdge("A", "B")
+    graph.addEdge("B", "D")
+    graph.addEdge("D", "C")
+    graph.addEdge("A", "C")
+    # graph.print()
+    return graph
+
+
+def createGraph2():
+    graph = Graph()
+    for lable in ["A", "B", "C", "D", "E"]:
+        graph.addNode(lable)
+    graph.addEdge("A", "B")
+    graph.addEdge("A", "E")
+    graph.addEdge("B", "E")
+    graph.addEdge("C", "A")
+    graph.addEdge("C", "B")
+    graph.addEdge("C", "D")
+    graph.addEdge("D", "E")
+    # graph.print()
+    return graph
+
+
+def createTopoGraph():
+    graph = Graph()
+    for lable in ["X", "A", "B", "P"]:
+        graph.addNode(lable)
+    graph.addEdge("X", "A")
+    graph.addEdge("X", "B")
+    graph.addEdge("A", "P")
+    graph.addEdge("B", "P")
+    # graph.print()
+    return graph
+
+
+def createCycle():
+    graph = Graph()
+    for lable in ["A", "B", "C"]:
+        graph.addNode(lable)
+    graph.addEdge("A", "B")
+    graph.addEdge("B", "C")
+    graph.addEdge("A", "C")
+    # graph.print()
+    return graph
+
+
+'''
+   A -> B
+ <|     |>
+C    <-    D
+'''
 if __name__ == "__main__":
-    # testTraveral()
-    # testProperties()
-    # testEquality()
-
-    # tree = BinarySearchTree()
-    # for x in [20, 10, 30]:
-    #     tree.insert(x)
-    # testValidBST(tree=tree)
-    
-    testBFS()
+    graph = createCycle()
+    traverser = Traverser(graph)
+    traverser.depthFirstSearchAt("A")
+    traverser.depthFirstSearchIterAt("A")
+    traverser.breathFirstSearch("A")
+    traverser.topologicalSort()
+    print(traverser.hasCycle())
 
 
-'''
-    20
-10     30
-         40
+# testTraveral()
+# testProperties()
+# testEquality()
 
+# tree = BinarySearchTree()
+# for x in [20, 10, 30]:
+#     tree.insert(x)
+# testValidBST(tree=tree)
 
-v.20
-    -> v.20.left=10
-        -> v.10.left=N
-            <- N
-        -> v.10.right=N
-            <- N
-        <= ap(10)
-    -> v.20.right=30
-        -> v.30.left=N
-            <- N
-        -> v.30.right=40
-            -> v.40.left=N
-                <- N
-            -> v.40.right=N
-                <- N
-            <= ap(40)
-        <= ap(30)
-    <= ap(20)
-
-Append Order: 10, 40, 30, 20
-Call Sequesnce: 20 -> 10 -> 30 -> 40
-'''
-
-
-'''
-        20
-   10        30
- 6    14  24
-3 8          26
-'''
+# testBFS()

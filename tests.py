@@ -46,3 +46,4 @@ def testValidBST(tree=example):
 def testBFS(tree=example):
     print('BFS: ', Traverser(tree).BFS())
     print()
+    
